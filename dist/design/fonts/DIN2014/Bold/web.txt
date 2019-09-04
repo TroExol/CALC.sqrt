@@ -1,0 +1,9 @@
+@font-face {
+font-family: 'DIN 2014 Bold';
+src: url('DIN2014-Bold.eot');
+src: url('DIN2014-Bold.eot?#iefix') format('embedded-opentype'),
+url('DIN2014-Bold.woff') format('woff'),
+url('DIN2014-Bold.ttf') format('truetype');
+font-weight: normal;
+font-style: normal;
+}

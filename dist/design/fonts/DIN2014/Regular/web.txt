@@ -1,0 +1,9 @@
+@font-face {
+font-family: 'DIN 2014 Regular';
+src: url('DIN2014-Regular.eot');
+src: url('DIN2014-Regular.eot?#iefix') format('embedded-opentype'),
+url('DIN2014-Regular.woff') format('woff'),
+url('DIN2014-Regular.ttf') format('truetype');
+font-weight: normal;
+font-style: normal;
+}
