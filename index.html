@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Извлечение корня</title>
+
+    <link rel="stylesheet" href="src/design/css/style.css">
+
+    <!-- <=IE 9 support -->
+    <!--[if lt IE 9]>
+    <script src="dist/libs/Response/html5shiv.min.js"></script>
+    <script src="dist/libs/Response/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body data-theme="light">
+<header class="header">
+    <h2 class="header__title">Извлечение корня</h2>
+
+    <section class="header-settings">
+        <div class="header-settings-theme">
+            <i class="enable-theme" data-theme="light"></i>
+            <i class="enable-theme" data-theme="dark"></i>
+        </div>
+
+        <div class="header-settings-language">
+            <a href="" class="header-settings-language-ru">
+                <img src="src/design/img/russian-flag.svg" alt="Russian language">
+            </a>
+            <a href="en" class="header-settings-language-en">
+                <img src="src/design/img/british-flag.svg" alt="English language">
+            </a>
+            </div>
+    </section>
+</header>
+
+<main class="content">
+    <h1 class="content__title">Lorem ipsum dolor sit amet.</h1>
+
+    <section class="content-calculator">
+        <input type="text" id="expression" class="content-calculator__expression" placeholder="Введите выражение..." autocomplete="off">
+        <button id="calc" class="content-calculator__calc btn">Извлечь</button>
+        <div class="content-calculator-output">
+            Корень введенного выражения равен:
+            <p id="output" class="content-calculator-output__inner">&#x221A;2</p>
+        </div>
+    </section>
+</main>
+
+<footer class="footer">
+    <p class="footer-copyright">
+        site.ru &#9400; 2019
+    </p>
+
+    <section class="footer-team">
+        <h2 class="footer-team__title">Наши разработчики</h2>
+
+        <section class="footer-team-cards">
+            <div class="footer-team-cards-person">
+                <img src="https://via.placeholder.com/150" alt="Клочковский Иван" class="footer-team-cards-person__img">
+                <h3 class="footer-team-cards-person__name">Клочковский Иван</h3>
+            </div>
+            <div class="footer-team-cards-person">
+                <img src="https://via.placeholder.com/150" alt="Артур Илькаев" class="footer-team-cards-person__img">
+                <h3 class="footer-team-cards-person__name">Артур Илькаев</h3>
+            </div>
+            <div class="footer-team-cards-person">
+                <img src="https://via.placeholder.com/150" alt="Владимир Отрощенко" class="footer-team-cards-person__img">
+                <h3 class="footer-team-cards-person__name">Владимир Отрощенко</h3>
+            </div>
+        </section>
+    </section>
+    <section class="footer-contact">
+        <h2 class="footer-contact__title">Связь с нами</h2>
+
+        <section class="footer-contact-variant">
+            <a href="mailto:#" class="footer-contact-variant__email">example@mail.ru</a>
+            <a href="tel:#" class="footer-contact-variant__tel">+7 (952) 524-24-25</a>
+        </section>
+    </section>
+</footer>
+
+<script src="src/js/main.js"></script>
+</body>
+</html>
