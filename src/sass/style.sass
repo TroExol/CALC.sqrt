@@ -22,8 +22,13 @@ input
   border: none
   padding: 1.5rem 3rem
   border-radius: 40px
-  transition: transform .2s, box-shadow .2s
+  transition: transform .2s, box-shadow .2s,
+  color: var(--text-second)
+  background-color: var(--second)
+  text-align: center
   outline: none
+  &::placeholder
+    color: var(--placeholder)
   &:focus
     transform: scale(1.05)
     box-shadow: 0 0 20px var(--second)
@@ -134,11 +139,10 @@ body
     align-items: center
     &__expression
       font-size: 1.1rem
-      color: var(--text-second)
-      background-color: var(--second)
-      text-align: center
-      &::placeholder
-        color: var(--placeholder)
+      margin-bottom: 10px
+    &__round
+      padding: 0.5rem 1rem
+      font-size: 1.1rem
     &__calc
       font-size: 1rem
       margin: 1rem 0

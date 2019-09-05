@@ -10,7 +10,7 @@
 
     <title>Извлечение корня</title>
 
-<!--    <link rel="stylesheet" href="dist/design/css/style.min.css">-->
+    <!--    <link rel="stylesheet" href="dist/design/css/style.min.css">-->
     <link rel="stylesheet" href="src/design/css/style.css">
 
     <!-- <=IE 9 support -->
@@ -36,13 +36,17 @@
             <a href="en" class="header-settings-language-en">
                 <img src="src/design/img/british-flag.svg" alt="English language">
             </a>
-            </div>
+        </div>
     </section>
 </header>
 
 <main class="content">
     <section class="content-calculator">
-        <input type="text" id="expression" class="content-calculator__expression" placeholder="Введите выражение..." autocomplete="off">
+        <input type="text" id="expression" class="content-calculator__expression" placeholder="4+4i" autocomplete="off">
+        <label for="round">Чисел после запятой</label>
+        <input type="text" id="round" class="content-calculator__round"
+               autocomplete="off"
+               value="3">
         <button id="calc" class="content-calculator__calc btn">Извлечь</button>
         <div class="content-calculator-output">
             Корень введенного выражения равен:
@@ -69,7 +73,8 @@
                 <h3 class="footer-team-cards-person__name">Артур Илькаев</h3>
             </div>
             <div class="footer-team-cards-person">
-                <img src="https://via.placeholder.com/150" alt="Владимир Отрощенко" class="footer-team-cards-person__img">
+                <img src="https://via.placeholder.com/150" alt="Владимир Отрощенко"
+                     class="footer-team-cards-person__img">
                 <h3 class="footer-team-cards-person__name">Владимир Отрощенко</h3>
             </div>
         </section>
