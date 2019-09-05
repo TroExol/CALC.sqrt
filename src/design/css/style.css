@@ -23,11 +23,12 @@ input {
   border: none;
   padding: 1.5rem 3rem;
   border-radius: 40px;
-  transition: transform 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
+  outline: none;
 }
 input:focus {
   transform: scale(1.05);
-  outline: none;
+  box-shadow: 0 0 20px var(--second);
 }
 
 @font-face {
