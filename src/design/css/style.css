@@ -6,7 +6,7 @@ body {
   --button: #4957B6;
   --button-hover: #A082E5;
   --placeholder: #ccc;
-  --a: blue;
+  --a: #c5c5c5;
 }
 
 body[data-theme=dark] {
@@ -104,6 +104,10 @@ body {
 }
 .header__title {
   color: #fff;
+}
+.header__action {
+  height: 100%;
+  padding: 10px 20px;
 }
 .header__action:hover {
   color: var(--text);
