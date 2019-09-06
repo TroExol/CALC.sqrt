@@ -136,14 +136,16 @@ body {
   display: flex;
   justify-content: center;
 }
-.header-settings-language > a {
+.header-settings-language > img {
+  height: 20px;
+  transition: transform 0.2s;
   cursor: pointer;
 }
-.header-settings-language > a:not(:first-child) {
-  margin-left: 0.5rem;
+.header-settings-language > img:hover {
+  transform: scale(1.05);
 }
-.header-settings-language > a img {
-  height: 20px;
+.header-settings-language > img:not(:first-child) {
+  margin-left: 0.5rem;
 }
 
 .content {
@@ -179,7 +181,7 @@ body {
   display: none;
   text-align: center;
 }
-.content-calculator-output__inner {
+.content-calculator-output__result {
   color: green;
 }
 
@@ -217,6 +219,10 @@ body {
 }
 .footer-team-cards-person:not(:first-child) {
   margin-left: 2rem;
+}
+.footer-team-cards-person__img {
+  width: 150px;
+  height: 177px;
 }
 .footer-team-cards-person__name {
   text-align: center;

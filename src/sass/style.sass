@@ -117,12 +117,14 @@ body
     &-language
       display: flex
       justify-content: center
-      > a
+      > img
+        height: 20px
+        transition: transform 0.2s
         cursor: pointer
+        &:hover
+          transform: scale(1.05)
         &:not(:first-child)
           margin-left: .5rem
-        img
-          height: 20px
 
 .content
   min-height: 100vh
@@ -150,7 +152,7 @@ body
       font-size: 1.4rem
       display: none
       text-align: center
-      &__inner
+      &__result
         color: green
 
 .footer
@@ -181,6 +183,9 @@ body
         align-items: center
         &:not(:first-child)
           margin-left: 2rem
+        &__img
+          width: 150px
+          height: 177px
         &__name
           text-align: center
           margin-top: .5rem
