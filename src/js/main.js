@@ -58,7 +58,7 @@ const root = (expression, round = 3) => {
 		const evaluate = math.evaluate(expression);
 		// Извлекаем корень и округляем
 		result = math.round(math.sqrt(evaluate), round).toString();
-		// Добавляем 2 варианта для комплексных чисел
+		// Добавляем 2 варианта для выражений с мнимой единицей
 		if (!math.hasNumericValue(result) && /i/.test(result)) {
 			result = '+-(' + result + ')';
 		}

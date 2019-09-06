@@ -6,6 +6,7 @@ const rename = require('gulp-rename');
 const clean = require('gulp-clean');
 const filesize = require('gulp-filesize');
 const babel = require('gulp-babel');
+const imagemin = require('gulp-imagemin');
 
 gulp.task('clean-js', () => gulp.src('dist/js/*.min.js', {read: false}).pipe(clean()));
 gulp.task('clean-css', () => gulp.src('dist/design/css/*.min.css', {read: false}).pipe(clean()));
@@ -35,9 +36,11 @@ gulp.task(
 		gulp
 			.src('src/js/*.js')
 			.pipe(filesize())
-			.pipe(babel({
-				presets: ['@babel/env']
-			}))
+			.pipe(
+				babel({
+					presets: ['@babel/env']
+				})
+			)
 			.pipe(
 				jsminify({
 					ext: {
@@ -51,4 +54,11 @@ gulp.task(
 	)
 );
 
-gulp.task('build', gulp.parallel('js-minify', 'css-minify'));
+gulp.task('img-optimize', () =>
+	gulp
+		.src('src/design/img/*.{jpg,svg}')
+		.pipe(imagemin())
+		.pipe(gulp.dest('dist/design/img/'))
+);
+
+gulp.task('build', gulp.parallel('js-minify', 'css-minify', 'img-optimize'));

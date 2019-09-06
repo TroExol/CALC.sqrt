@@ -105,6 +105,9 @@ body {
 .header__title {
   color: #fff;
 }
+.header__action:hover {
+  color: var(--text);
+}
 .header-settings-theme {
   display: flex;
   justify-content: center;
