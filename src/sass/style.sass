@@ -69,6 +69,38 @@ body
   color: var(--text)
   background-color: var(--first)
 
+table
+  color: #fff
+  background-color: #343a40
+  width: 80%
+  border-collapse: collapse
+  caption
+    padding-top: .75rem
+    padding-bottom: .75rem
+    color: #6c757d
+    text-align: left
+  thead
+    th
+      padding: .75rem
+      border-color: #454d55
+      border-top: 1px solid #dee2e6
+      border-bottom: 2px solid #dee2e6
+      vertical-align: bottom
+  tbody
+    tr
+      &:hover
+        color: #fff
+        background-color: rgba(255,255,255,.075)
+      &:nth-of-type(odd)
+        background-color: rgba(255,255,255,.05)
+      td
+        padding: .75rem
+        border-color: #454d55
+        border-top: 1px solid #dee2e6
+        border-bottom: 2px solid #dee2e6
+        vertical-align: bottom
+
+
 .btn
   border: none
   outline: none
@@ -136,6 +168,12 @@ body
   flex-direction: column
   justify-content: center
   align-items: center
+  &.documentation
+    margin: 7rem 0
+    &-label
+      margin-bottom: .75rem
+    .description__title
+      margin-top: .75rem
   &__title
     text-align: center
   &-calculator

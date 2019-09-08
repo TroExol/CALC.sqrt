@@ -78,6 +78,40 @@ body {
   background-color: var(--first);
 }
 
+table {
+  color: #fff;
+  background-color: #343a40;
+  width: 80%;
+  border-collapse: collapse;
+}
+table caption {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  color: #6c757d;
+  text-align: left;
+}
+table thead th {
+  padding: 0.75rem;
+  border-color: #454d55;
+  border-top: 1px solid #dee2e6;
+  border-bottom: 2px solid #dee2e6;
+  vertical-align: bottom;
+}
+table tbody tr:hover {
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.075);
+}
+table tbody tr:nth-of-type(odd) {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+table tbody tr td {
+  padding: 0.75rem;
+  border-color: #454d55;
+  border-top: 1px solid #dee2e6;
+  border-bottom: 2px solid #dee2e6;
+  vertical-align: bottom;
+}
+
 .btn {
   border: none;
   outline: none;
@@ -160,6 +194,12 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+.content.documentation {
+  margin: 7rem 0;
+}
+.content.documentation-label {
+  margin-bottom: 0.75rem;
 }
 .content__title {
   text-align: center;
