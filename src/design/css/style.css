@@ -118,26 +118,24 @@ body {
   margin-bottom: 0.5rem;
 }
 .header-settings-theme > i {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
   transition: transform 0.2s;
   cursor: pointer;
+  user-select: none;
+}
+.header-settings-theme > i[data-theme=light] {
+  background-color: #fff;
+}
+.header-settings-theme > i[data-theme=dark] {
+  background-color: #000;
 }
 .header-settings-theme > i:not(:first-child) {
   margin-left: 0.5rem;
 }
 .header-settings-theme > i:hover {
   transform: scale(1.05);
-}
-.header-settings-theme [data-theme=light] {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: #fff;
-}
-.header-settings-theme [data-theme=dark] {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: #000;
 }
 .header-settings-language {
   display: flex;
@@ -147,6 +145,7 @@ body {
   height: 20px;
   transition: transform 0.2s;
   cursor: pointer;
+  user-select: none;
 }
 .header-settings-language > img:hover {
   transform: scale(1.05);
@@ -263,6 +262,14 @@ body {
   }
 }
 @media (max-width: 552px) {
+  html {
+    font-size: 12px;
+  }
+
+  .content-calculator__round {
+    width: 66px;
+  }
+
   .footer-team-cards {
     flex-direction: column;
   }
@@ -271,11 +278,6 @@ body {
   }
   .footer-contact-variant {
     font-size: 1rem;
-  }
-}
-@media (max-width: 552px) {
-  html {
-    font-size: 12px;
   }
 }
 @media (max-width: 310px) {

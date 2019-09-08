@@ -1,7 +1,9 @@
+// Переводы
 const languages = {
 	ru: {
 		title: 'Извлечение корня',
-		round_label: 'Цифр после запятой',
+		expression_label: 'Введите выражение...',
+		round_label: 'Точность',
 		round_btn: 'Извлечь',
 		output_label: 'Корень введенного выражения равен:',
 		person_title: 'Наши разработчики',
@@ -15,8 +17,9 @@ const languages = {
 	},
 	en: {
 		title: 'Root extraction',
-		round_label: 'Decimal Numbers',
-		round_btn: 'Extract',
+		expression_label: 'Enter an expression...',
+		round_label: 'Accuracy',
+		round_btn: 'Root',
 		output_label: 'The root of the entered expression is:',
 		person_title: 'Our developers',
 		klochkovskiy: 'Klochkovskiy Ivan',
@@ -29,7 +32,8 @@ const languages = {
 	},
 	zh: {
 		title: '根拔除',
-		round_label: '十進制數',
+		expression_label: '輸入表達式...',
+		round_label: '準確性',
 		round_btn: '提取',
 		output_label: '輸入表達式的根是:',
 		person_title: '我們的開發者',
@@ -43,7 +47,8 @@ const languages = {
 	},
 	es: {
 		title: 'Extracción de raíces',
-		round_label: 'Números decimales',
+		expression_label: 'Ingrese una expresión...',
+		round_label: 'Precisión',
 		round_btn: 'Expulsar',
 		output_label: 'La raíz de la expresión ingresada es:',
 		person_title: 'Nuestros desarrolladores',
@@ -56,7 +61,61 @@ const languages = {
 		error: 'Su expresión tiene un error o no podemos resolverlo en este momento'
 	}
 };
+// Имя текущего файла
 const path = location.pathname.substring(location.pathname.lastIndexOf('/') + 1);
+
+/**
+ * Меняет язык сайта
+ * @param {string} lang Язык, на который нужно перевести
+ */
+const changeLanguage = (lang) => {
+	/**
+	 * Присваивание переведенного текста элементу
+	 * @param {string} selector
+	 * @param {string} prop Свойство DOM элемента
+	 * @param {string} section Секция из language объекта
+	 */
+	const assign = (selector, prop, section) => {
+		document.querySelector(selector)[prop] = languages[lang][section];
+	};
+
+	assign('title', 'innerText', 'title');
+	assign('.header__title', 'innerText', 'expression_label');
+	assign('.footer-team__title', 'innerText', 'person_title');
+	assign(
+		'.footer-team-cards-person[data-person="klochkovskiy"] .footer-team-cards-person__name',
+		'innerText',
+		'klochkovskiy'
+	);
+	assign('.footer-team-cards-person[data-person="ilkaev"] .footer-team-cards-person__name', 'innerText', 'ilkaev');
+	assign(
+		'.footer-team-cards-person[data-person="otroshenko"] .footer-team-cards-person__name',
+		'innerText',
+		'otroshenko'
+	);
+	assign('.footer-contact__title', 'innerText', 'contact_title');
+	switch (path) {
+		// Главная страница
+		case 'index.html':
+		case '':
+			assign('.header__action[data-url="documentation"]', 'innerText', 'documentation_title');
+			assign('#expression', 'placeholder', 'expression_label');
+			assign('.content-calculator__label', 'innerText', 'round_label');
+			assign('.content-calculator__calc', 'innerText', 'round_btn');
+			assign('.content-calculator-output__label', 'innerText', 'output_label');
+
+			if (/[\D]{6,}/.test(document.querySelector('.content-calculator-output__result').innerText)) {
+				assign('.content-calculator-output__result', 'innerText', 'error');
+			}
+			break;
+		// Страница с пользовательским руководством
+		case 'documentation.html':
+			assign('.header__action[data-url="main"]', 'innerText', 'main_title');
+			break;
+	}
+};
+
+// Отображение темы, перевод страницы после полной загрузки контента
 document.addEventListener('DOMContentLoaded', () => {
 	document.body.dataset.theme = localStorage.getItem('tr_theme') || 'dark';
 	const lang = localStorage.getItem('tr_lang') || 'ru';
@@ -64,15 +123,34 @@ document.addEventListener('DOMContentLoaded', () => {
 	changeLanguage(lang);
 });
 
+/**
+ * Извлекает корень
+ * @param {string|number} expression Выражение, из которого необходимо извлечь корень
+ * @param {number} round Точность округления
+ * @returns {string}
+ */
 const root = (expression, round = 3) => {
 	let result = languages[document.documentElement.lang].error;
 	try {
-		const evaluate = math.evaluate(expression);
-		// Извлекаем корень и округляем
-		result = math.round(math.sqrt(evaluate), round).toString();
-		// Добавляем 2 варианта для выражений с мнимой единицей
-		if (!math.hasNumericValue(result) && /i/.test(result)) {
-			result = '+-(' + result + ')';
+		// Приводим все буквы к нижнему регистру
+		if (/[A-Za-z]/.test(expression)) {
+			expression = expression.toLowerCase();
+		}
+
+		// Извлекаем корень
+		const sqrt = math
+			.chain(expression)
+			.evaluate()
+			.sqrt()
+			.done();
+		if (!math.isNaN(sqrt)) {
+			// Округляем
+			result = math.round(sqrt, round).toString();
+
+			if (!math.isZero(sqrt)) {
+				// Добавляем 2 варианта
+				result = '+-(' + result + ')';
+			}
 		}
 	} catch (e) {
 		console.error(e.message);
@@ -80,6 +158,26 @@ const root = (expression, round = 3) => {
 
 	return result;
 };
+
+if (path === 'index.html' || path === '') {
+	// Присваиваем слушатель на кнопку извлечения корня
+	document.getElementById('calc').addEventListener('click', () => {
+		let round = document.getElementById('round').value;
+		// Если введенное значение точности не является числом, присвоить 3
+		round = /[^\d.]/.test(round) ? 3 : Math.round(round);
+		if (round > 15) {
+			round = 15;
+		} else if (round < 0) {
+			round = 0;
+		}
+		document.getElementById('round').value = round;
+
+		const expr = document.getElementById('expression').value;
+
+		document.getElementById('output').innerHTML = root(expr, round);
+		document.querySelector('.content-calculator-output').style.display = 'block';
+	});
+}
 
 document.querySelector('.header-settings-theme').addEventListener('click', (event) => {
 	const {target} = event;
@@ -89,56 +187,6 @@ document.querySelector('.header-settings-theme').addEventListener('click', (even
 		localStorage.setItem('tr_theme', target.dataset.theme);
 	}
 });
-
-const changeLanguage = (lang) => {
-	document.querySelector('title').innerText = languages[lang].title;
-	document.querySelector('.header__title').innerText = languages[lang].title;
-	switch (path) {
-		case 'index.html':
-			document.querySelector('.header__action[data-url="documentation"]').innerText =
-				languages[lang].documentation_title;
-			document.querySelector('.content-calculator__label').innerText = languages[lang].round_label;
-			document.querySelector('.content-calculator__calc').innerText = languages[lang].round_btn;
-			document.querySelector('.content-calculator-output__label').innerText = languages[lang].output_label;
-
-			if (/[\D]{6,}/.test(document.querySelector('.content-calculator-output__result').innerText)) {
-				document.querySelector('.content-calculator-output__result').innerText = languages[lang].error;
-			}
-			break;
-		case 'documentation.html':
-			document.querySelector('.header__action[data-url="main"]').innerText = languages[lang].main_title;
-			break;
-	}
-	if (path === 'index.html') {
-		document.getElementById('calc').addEventListener('click', () => {
-			let round = document.getElementById('round').value;
-			if (/\D/.test(round)) {
-				document.getElementById('round').value = 3;
-				round = 3;
-			}
-			const expr = document.getElementById('expression').value;
-
-			document.getElementById('output').innerHTML = root(expr, round);
-			document.querySelector('.content-calculator-output').style.display = 'block';
-		});
-	}
-	document.querySelector('.footer-team__title').innerText = languages[lang].person_title;
-	document.querySelector('.footer-team-cards-person[data-person="klochkovskiy"] .footer-team-cards-person__img').alt =
-		languages[lang].klochkovskiy;
-	document.querySelector(
-		'.footer-team-cards-person[data-person="klochkovskiy"] .footer-team-cards-person__name'
-	).innerText = languages[lang].klochkovskiy;
-	document.querySelector('.footer-team-cards-person[data-person="ilkaev"] .footer-team-cards-person__img').alt =
-		languages[lang].ilkaev;
-	document.querySelector('.footer-team-cards-person[data-person="ilkaev"] .footer-team-cards-person__name').innerText =
-		languages[lang].ilkaev;
-	document.querySelector('.footer-team-cards-person[data-person="otroshenko"] .footer-team-cards-person__img').alt =
-		languages[lang].otroshenko;
-	document.querySelector(
-		'.footer-team-cards-person[data-person="otroshenko"] .footer-team-cards-person__name'
-	).innerText = languages[lang].otroshenko;
-	document.querySelector('.footer-contact__title').innerText = languages[lang].contact_title;
-};
 
 document.querySelector('.header-settings-language').addEventListener('click', (event) => {
 	const {target} = event;

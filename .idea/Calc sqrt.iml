@@ -6,5 +6,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="mocha" level="application" />
+    <orderEntry type="library" name="math" level="project" />
   </component>
 </module>
